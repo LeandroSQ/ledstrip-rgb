@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main_nav_graph.xml"
+	app:startDestination="@id/LEDFragment">
+
+	<fragment
+		android:id="@+id/LEDColorFragment"
+		android:name="quevedo.soares.leandro.automation.view.led.singlecolor.LEDColorFragment"
+		android:label="LEDColorFragment"
+		tools:layout="@layout/fragment_led_color" />
+
+	<fragment
+		android:id="@+id/PCFragment"
+		android:name="quevedo.soares.leandro.automation.view.pc.PCFragment"
+		android:label="PCFragment"
+		tools:layout="@layout/fragment_pc" />
+
+	<fragment
+		android:id="@+id/LEDFragment"
+		android:name="quevedo.soares.leandro.automation.view.led.LEDFragment"
+		android:label="LEDFragment"
+		tools:layout="@layout/fragment_led">
+
+		<action
+			android:id="@+id/action_LEDFragment_to_LEDColorFragment"
+			app:destination="@id/LEDColorFragment" />
+
+	</fragment>
+
+</navigation>

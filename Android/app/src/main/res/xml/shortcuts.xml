@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!--<capability android:name="actions.intent.POWER_LIGHTS">
+		<intent
+			android:action="android.intent.action.VIEW"
+			android:targetClass="quevedo.soares.leandro.browse"
+			android:targetPackage="quevedo.soares.leandro.automation.view.main.MainActivity">
+			<parameter
+				android:name="state"
+				android:key="lightState"
+				android:required="true" />
+		</intent>
+
+
+	</capability>-->
+
+	<shortcut
+		android:enabled="true"
+		android:icon="@drawable/ic_power"
+		android:shortcutDisabledMessage="@string/shortcut_power_disabled"
+		android:shortcutId="power_lights"
+		android:shortcutLongLabel="@string/shortcut_power_long"
+		android:shortcutShortLabel="@string/shortcut_power_short">
+
+		<intent
+			android:action="android.intent.action.VIEW"
+			android:targetClass="quevedo.soares.leandro.browse"
+			android:targetPackage="quevedo.soares.leandro.automation.MainActivity">
+		</intent>
+
+
+		<categories android:name="android.shortcut.conversation"/>
+
+		<!--<capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
+			<parameter-binding
+				android:name="state"
+				android:key="lightState"
+				android:required="true" />
+		</capability-binding>-->
+
+	</shortcut>
+
+</shortcuts>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<declare-styleable name="SliderButtonComponent">
+		<attr name="android:text" format="string"/>
+		<attr name="android:min" format="float"/>
+		<attr name="android:max" format="float"/>
+		<attr name="android:value" format="float"/>
+		<attr name="colorBackground" format="color|reference"/>
+		<attr name="colorForeground" format="reference|color"/>
+	</declare-styleable>
+
+</resources>

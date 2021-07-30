@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Automation</string>
+
+    <string name="shortcut_power_short">Power</string>
+    <string name="shortcut_power_long">Power on and off the LED lights</string>
+    <string name="shortcut_power_disabled">Power on not available at the time</string>
+
+</resources>

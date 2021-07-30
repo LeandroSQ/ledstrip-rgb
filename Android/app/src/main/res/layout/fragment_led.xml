@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:animateLayoutChanges="true"
+	android:orientation="vertical"
+	tools:background="@color/background"
+	tools:context=".view.led.LEDFragment"
+	tools:layout_height="match_parent">
+
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+		android:id="@+id/idLoader"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:indeterminate="true"
+		android:visibility="gone"
+		app:indicatorColor="@color/fab_background"
+		tools:visibility="visible" />
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:fillViewport="true">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:maxLines="1"
+				android:layout_marginTop="10dp"
+				android:text="Effects"
+				android:textColor="@color/white"
+				android:textSize="20sp"
+				android:textStyle="bold" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/idRecyclerView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="10dp"
+				android:layout_marginTop="5dp"
+				android:nestedScrollingEnabled="true"
+				android:overScrollMode="never"
+				app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+				app:spanCount="2"
+				tools:itemCount="3"
+				tools:listitem="@layout/item_card" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:maxLines="1"
+				android:layout_marginTop="10dp"
+				android:text="Controls"
+				android:textColor="@color/white"
+				android:textSize="20sp"
+				android:textStyle="bold" />
+
+			<quevedo.soares.leandro.automation.view.widgets.SliderButtonComponent
+				android:id="@+id/idBrightnessSlider"
+				android:layout_width="match_parent"
+				android:layout_height="50dp"
+				android:layout_marginHorizontal="20dp"
+				android:layout_marginTop="10dp"
+				android:max="255"
+				android:min="0"
+				android:text="Brightness"
+				android:value="0"
+				app:colorBackground="@color/dark_gray"
+				app:colorForeground="@color/white"
+				tools:alpha="1" />
+
+			<quevedo.soares.leandro.automation.view.widgets.SliderButtonComponent
+				android:id="@+id/idSpeedSlider"
+				android:layout_width="match_parent"
+				android:layout_height="50dp"
+				android:layout_marginHorizontal="20dp"
+				android:layout_marginTop="10dp"
+				android:max="10"
+				android:min="1"
+				android:text="Speed"
+				android:value="0"
+				app:colorBackground="@color/dark_gray"
+				app:colorForeground="@color/white"
+				tools:alpha="1" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="20dp"
+				android:layout_marginTop="10dp">
+
+				<Button
+					android:id="@+id/idButtonPowerOff"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:drawableTop="@drawable/ic_color_off"
+					android:drawableTint="#ec4646"
+					android:text="Power Off" />
+
+				<Button
+					android:id="@+id/idButtonColor"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:drawableTop="@drawable/ic_colorwheel_smalll"
+					android:text="Pick Color" />
+
+				<Button
+					android:id="@+id/idButtonPowerOn"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:drawableTop="@drawable/ic_color_on"
+					android:drawableTint="#16c79a"
+					android:text="Power ON" />
+
+			</LinearLayout>
+		</LinearLayout>
+
+
+	</androidx.core.widget.NestedScrollView>
+</LinearLayout>

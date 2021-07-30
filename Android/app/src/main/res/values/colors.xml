@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="black">#FF000000</color>
+	<color name="white">#FFFFFFFF</color>
+	<color name="background">#151515</color>
+	<color name="dark_gray">#212121</color>
+	<color name="fab_foreground">#282846</color>
+	<color name="darker_fab_foreground">#1D1D3A</color>
+	<color name="fab_background">#fed049</color>
+	<color name="bottom_app_bar_foreground">#FFFFFFFF</color>
+	<color name="bottom_app_bar_background">#007580</color>
+</resources>
