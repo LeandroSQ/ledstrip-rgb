@@ -1,2 +1,49 @@
-# ledstrip-rgb
-Controlling WS8211 LED strip with ESP8266 and Android 
+<h1 align="center">LED Strip RGB</h1>
+
+<p align="center">  
+  <img src="./misc/logo.png" width="128"/>
+</p>
+
+<p align="center">Controlling WS8211 LED strip with ESP8266 and Android</p>
+
+---
+
+## The project
+
+This project was made for controlling a WS8211 LED string using an ESP8266 MCU.
+And to control the MCU an Android app (It can also be controlled by a simple web interface at port 80)
+
+
+### ESP8266
+
+The code is availbale inside the [ESP8266 source code directory](./ESP8266)
+
+Features:
+- Uses Rx pin to interface with the LED strip, so no need for pullup resistors at GP0 or GP2
+- Makes usage of the wonderful [FastLED](http://fastled.io/) library
+- Automatically syncs configurations with [Firebase](https://firebase.google.com/) and on restart restore the last state
+- Exposes a REST API, of which allows control over:
+  - color
+  - effect
+  - brightness
+  - power
+  - speed
+- Web interface at port 80
+<img src="./misc/web interface.png" width="128"/>
+  
+- Remote debbuging via telnet
+- OTA (Over The Air) firmware updates
+- Configurable with define flags (On configuration.h, template to be released...)
+- Multiple effects
+  - Rainbow cycle
+  - Rainbow 
+  - Solid color
+  - Knight rider
+  - Sparkle
+  - Pulse
+  - Fire
+
+---
+
+### Android
+ 
