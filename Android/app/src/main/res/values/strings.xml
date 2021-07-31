@@ -1,8 +1,31 @@
 <resources>
-    <string name="app_name">Automation</string>
+	<string name="app_name">Led strip RGB</string>
 
-    <string name="shortcut_power_short">Power</string>
-    <string name="shortcut_power_long">Power on and off the LED lights</string>
-    <string name="shortcut_power_disabled">Power on not available at the time</string>
+	<!-- region Application shortcuts -->
+	<string name="shortcut_power_short">Power</string>
+	<string name="shortcut_power_long">Power on and off the LED lights</string>
+	<string name="shortcut_power_disabled">Power on not available at the time</string>
+	<!-- endregion -->
+
+	<string-array name="effects">
+		<item>Rainbow cycle</item>
+		<item>Rainbow</item>
+		<item>Solid color</item>
+		<item>Knight rider</item>
+		<item>Sparkle</item>
+		<item>Pulse</item>
+		<item>Fire</item>
+	</string-array>
+
+	<!-- region Notification channels -->
+	<string name="notification_channel_background_id">background_operations</string>
+	<string name="notification_channel_background_name">Background operations</string>
+	<!-- endregion -->
+
+	<!-- region Power toggle worker -->
+	<string name="action_cancel">Cancel operation</string>
+	<string name="worker_notification_title">Running background operation</string>
+	<string name="worker_notification_text">Toggling LED state...</string>
+	<!-- endregion -->
 
 </resources>

@@ -7,19 +7,13 @@
 
 	<fragment
 		android:id="@+id/LEDColorFragment"
-		android:name="quevedo.soares.leandro.automation.view.led.singlecolor.LEDColorFragment"
+		android:name="quevedo.soares.leandro.ledstriprgb.view.home.singlecolor.LEDColorFragment"
 		android:label="LEDColorFragment"
 		tools:layout="@layout/fragment_led_color" />
 
 	<fragment
-		android:id="@+id/PCFragment"
-		android:name="quevedo.soares.leandro.automation.view.pc.PCFragment"
-		android:label="PCFragment"
-		tools:layout="@layout/fragment_pc" />
-
-	<fragment
 		android:id="@+id/LEDFragment"
-		android:name="quevedo.soares.leandro.automation.view.led.LEDFragment"
+		android:name="quevedo.soares.leandro.ledstriprgb.view.home.HomeFragment"
 		android:label="LEDFragment"
 		tools:layout="@layout/fragment_led">
 

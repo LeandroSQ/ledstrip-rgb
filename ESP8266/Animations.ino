@@ -161,18 +161,6 @@ void animateFire() {
         if (buffer[i] > 1.0f) buffer[i] = 1.0f;
         else if (buffer[i] < 0.0f) buffer[i] = 0.0f;
 
-
-
-
-        /* CHSV pixel = rgb2hsv_approximate(leds[i]);
-        pixel.value = brightness;
-        pixel.saturation = 255;
-        pixel.hue += (uint8_t) ((random8() / 255.0f - 0.5f) * speed * 0.5f);
-
-        if (pixel.hue > 57) pixel.hue = 57;
-        else if (pixel.hue < 0) pixel.hue = 0;
-
-        leds[index] = pixel; */
     }
 
     FastLED.show();

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	package="quevedo.soares.leandro.automation">
+	package="quevedo.soares.leandro.ledstriprgb">
 
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application
-		android:name=".Application"
+		android:name="quevedo.soares.leandro.ledstriprgb.Application"
 		android:allowBackup="false"
 		android:fullBackupContent="false"
 		android:icon="@mipmap/ic_launcher"
@@ -17,7 +17,9 @@
 		android:usesCleartextTraffic="true"
 		tools:ignore="AllowBackup">
 
-		<activity android:name=".view.main.MainActivity">
+		<activity
+			android:name="quevedo.soares.leandro.ledstriprgb.view.main.MainActivity"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
@@ -26,21 +28,14 @@
 		</activity>
 
 		<activity
-			android:name=".view.shortcut.ShortcutActivity"
+			android:name="quevedo.soares.leandro.ledstriprgb.view.shortcut.ShortcutActivity"
+			android:exported="true"
 			android:theme="@android:style/Theme.NoDisplay" />
 
 		<provider
 			android:name="androidx.work.impl.WorkManagerInitializer"
 			android:authorities="${applicationId}.workmanager-init"
 			tools:node="remove" />
-
-		<!--<meta-data
-			android:name="android.app.shortcuts"
-			android:resource="@xml/shortcuts" />-->
-
-		<!--<meta-data
-			android:name="com.google.android.actions"
-			android:resource="@xml/actions" />-->
 
 	</application>
 

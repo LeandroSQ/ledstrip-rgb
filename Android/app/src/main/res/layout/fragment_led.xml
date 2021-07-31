@@ -7,7 +7,7 @@
 	android:animateLayoutChanges="true"
 	android:orientation="vertical"
 	tools:background="@color/background"
-	tools:context=".view.led.LEDFragment"
+	tools:context=".view.home.HomeFragment"
 	tools:layout_height="match_parent">
 
 	<com.google.android.material.progressindicator.LinearProgressIndicator
@@ -65,7 +65,7 @@
 				android:textSize="20sp"
 				android:textStyle="bold" />
 
-			<quevedo.soares.leandro.automation.view.widgets.SliderButtonComponent
+			<quevedo.soares.leandro.ledstriprgb.view.component.SliderButtonComponent
 				android:id="@+id/idBrightnessSlider"
 				android:layout_width="match_parent"
 				android:layout_height="50dp"
@@ -79,7 +79,7 @@
 				app:colorForeground="@color/white"
 				tools:alpha="1" />
 
-			<quevedo.soares.leandro.automation.view.widgets.SliderButtonComponent
+			<quevedo.soares.leandro.ledstriprgb.view.component.SliderButtonComponent
 				android:id="@+id/idSpeedSlider"
 				android:layout_width="match_parent"
 				android:layout_height="50dp"
@@ -115,7 +115,7 @@
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
 					android:background="?attr/selectableItemBackgroundBorderless"
-					android:drawableTop="@drawable/ic_colorwheel_smalll"
+					android:drawableTop="@drawable/ic_colorwheel_small"
 					android:text="Pick Color" />
 
 				<Button
