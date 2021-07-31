@@ -47,3 +47,34 @@ Features:
 
 ### Android
  
+Features:
+- Architecture
+  - Kotlin
+  - View state
+  - Live data (To be replaced by flow)
+  - View model
+  - MVVM
+  - Koin
+  - Material components
+  - Navigation component
+  - Android Workers
+  - Android App Shortcuts
+- Light and Dark theming
+
+<img src="./misc/app light.png" width="128"/> <img src="./misc/app dark.png" width="128"/>
+
+- Color picker
+<img src="./misc/app dark color picker.png" width="128"/>
+
+- [Custom slider button](./Android/app/src/main/kotlin/quevedo/soares/leandro/ledstriprgb/view/component/SliderButtonComponent.kt)
+  - A custom view designed for me to this project, it's used on the Home screen for controlling Brightness and Speed values
+  - Supports view outlines
+  - Supports finger index
+  - Handle saved and restored instances
+  - Auto animate changes
+  - Drawing made from scratch using Canvas API
+  - Touch handling with drag and tap detection
+  - Antialiased
+  - Optmized for performance
+  - Customizable by code and xml properties (Styles also supported)
+
