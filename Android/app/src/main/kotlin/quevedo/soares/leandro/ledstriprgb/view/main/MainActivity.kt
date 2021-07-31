@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun setupNavigation() {
+		setSupportActionBar(binding.idToolbar)
 		NavigationUI.setupActionBarWithNavController(this, this.navController, this.toolbarConfiguration)
 	}
 

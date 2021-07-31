@@ -6,6 +6,25 @@
 	android:layout_height="match_parent"
 	tools:context=".view.main.MainActivity">
 
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/idAppBarLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/idToolbar"
+			android:layout_width="match_parent"
+			app:title="@string/app_name"
+			android:background="?colorPrimary"
+			app:titleTextColor="@color/white"
+			app:titleTextAppearance="@style/Theme.ActionBar"
+			android:layout_height="wrap_content">
+
+		</com.google.android.material.appbar.MaterialToolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+
 	<androidx.fragment.app.FragmentContainerView
 		android:id="@+id/idFragmentContainerView"
 		android:name="androidx.navigation.fragment.NavHostFragment"
