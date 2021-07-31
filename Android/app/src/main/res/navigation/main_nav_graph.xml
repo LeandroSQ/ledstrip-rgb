@@ -19,7 +19,8 @@
 
 		<action
 			android:id="@+id/action_LEDFragment_to_LEDColorFragment"
-			app:destination="@id/LEDColorFragment" />
+			app:destination="@id/LEDColorFragment"
+			app:popUpToInclusive="true" />
 
 	</fragment>
 

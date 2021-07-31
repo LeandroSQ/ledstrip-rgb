@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import quevedo.soares.leandro.ledstriprgb.R
 import quevedo.soares.leandro.ledstriprgb.databinding.FragmentLedBinding
@@ -76,14 +77,19 @@ class HomeFragment : Fragment() {
 				when (it) {
 
 					is HomeFragmentViewModel.ViewState.Error -> {
-						// TODO: Show errors
+						// Shows a snackbar with the error
+						it.exception.message?.let { message ->
+							Snackbar.make(binding.idLinearLayoutRoot, message, Snackbar.LENGTH_SHORT)
+						}
 					}
 
 					is HomeFragmentViewModel.ViewState.FetchBrightness -> {
+						// Update the brightness value
 						binding.idBrightnessSlider.setValueAnimated(it.value.toFloat())
 					}
 
 					is HomeFragmentViewModel.ViewState.FetchSpeed -> {
+						// Update the speed value
 						binding.idSpeedSlider.setValueAnimated(it.value)
 					}
 

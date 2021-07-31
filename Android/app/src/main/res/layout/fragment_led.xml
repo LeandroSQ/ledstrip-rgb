@@ -5,8 +5,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:animateLayoutChanges="true"
+	android:id="@+id/idLinearLayoutRoot"
 	android:orientation="vertical"
-	tools:background="@color/background"
 	tools:context=".view.home.HomeFragment"
 	tools:layout_height="match_parent">
 
@@ -36,9 +36,8 @@
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:layout_marginTop="10dp"
-				android:text="Effects"
-				android:textColor="@color/white"
-				android:textSize="20sp"
+				android:text="@string/fragment_led_effects"
+				android:textSize="18sp"
 				android:textStyle="bold" />
 
 			<androidx.recyclerview.widget.RecyclerView
@@ -60,9 +59,8 @@
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:layout_marginTop="10dp"
-				android:text="Controls"
-				android:textColor="@color/white"
-				android:textSize="20sp"
+				android:text="@string/fragment_led_controls"
+				android:textSize="18sp"
 				android:textStyle="bold" />
 
 			<quevedo.soares.leandro.ledstriprgb.view.component.SliderButtonComponent
@@ -73,7 +71,7 @@
 				android:layout_marginTop="10dp"
 				android:max="255"
 				android:min="0"
-				android:text="Brightness"
+				android:text="@string/fragment_led_brightness"
 				android:value="0"
 				app:colorBackground="@color/dark_gray"
 				app:colorForeground="@color/white"
@@ -87,7 +85,7 @@
 				android:layout_marginTop="10dp"
 				android:max="10"
 				android:min="1"
-				android:text="Speed"
+				android:text="@string/fragment_led_speed"
 				android:value="0"
 				app:colorBackground="@color/dark_gray"
 				app:colorForeground="@color/white"
@@ -106,27 +104,33 @@
 					android:layout_weight="1"
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:drawableTop="@drawable/ic_color_off"
-					android:drawableTint="#ec4646"
-					android:text="Power Off" />
+					android:drawableTint="@color/color_red"
+					android:textColor="?android:attr/textColorPrimary"
+					android:text="@string/fragment_led_power_off"
+					style="?android:attr/buttonBarButtonStyle" />
 
 				<Button
 					android:id="@+id/idButtonColor"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
+					android:textColor="?android:attr/textColorPrimary"
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:drawableTop="@drawable/ic_colorwheel_small"
-					android:text="Pick Color" />
+					android:text="@string/fragment_led_pick_color"
+					style="?android:attr/buttonBarButtonStyle" />
 
 				<Button
 					android:id="@+id/idButtonPowerOn"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
+					android:textColor="?android:attr/textColorPrimary"
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:drawableTop="@drawable/ic_color_on"
-					android:drawableTint="#16c79a"
-					android:text="Power ON" />
+					android:drawableTint="@color/color_aqua_green"
+					android:text="@string/fragment_led_power_on"
+					style="?android:attr/buttonBarButtonStyle" />
 
 			</LinearLayout>
 		</LinearLayout>

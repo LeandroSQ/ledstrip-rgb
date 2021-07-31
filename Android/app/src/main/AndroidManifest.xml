@@ -13,12 +13,13 @@
 		android:label="@string/app_name"
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
-		android:theme="@style/Theme.Automation"
+		android:theme="@style/Theme.App"
 		android:usesCleartextTraffic="true"
 		tools:ignore="AllowBackup">
 
 		<activity
 			android:name="quevedo.soares.leandro.ledstriprgb.view.main.MainActivity"
+			android:configChanges="uiMode"
 			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

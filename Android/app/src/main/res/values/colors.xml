@@ -2,11 +2,16 @@
 <resources>
 	<color name="black">#FF000000</color>
 	<color name="white">#FFFFFFFF</color>
-	<color name="background">#151515</color>
+	<color name="dark_background">#151515</color>
+	<color name="dark_foreground">#fff</color>
+	<color name="light_background">#efefef</color>
+	<color name="light_foreground">#212121</color>
 	<color name="dark_gray">#212121</color>
 	<color name="fab_foreground">#282846</color>
 	<color name="darker_fab_foreground">#1D1D3A</color>
 	<color name="fab_background">#fed049</color>
 	<color name="bottom_app_bar_foreground">#FFFFFFFF</color>
 	<color name="bottom_app_bar_background">#007580</color>
+	<color name="color_red">#ec4646</color>
+	<color name="color_aqua_green">#16c79a</color>
 </resources>

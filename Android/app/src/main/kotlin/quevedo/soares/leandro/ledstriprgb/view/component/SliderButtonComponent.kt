@@ -4,21 +4,27 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.graphics.minus
 import quevedo.soares.leandro.ledstriprgb.R
+import quevedo.soares.leandro.ledstriprgb.extension.clamp
 import kotlin.math.abs
 
-class SliderButtonComponent : View {
+// Constant to determine which events should be processed
+private val CONSUMED_EVENTS = arrayOf(
+	MotionEvent.ACTION_MOVE,
+	MotionEvent.ACTION_UP,
+	MotionEvent.ACTION_DOWN
+)
 
-	private var primaryColor = 0
-	private var secondaryColor = 0
-	private val radius = 10
-	private val textSize = 20
-	var text: String = ""
+@Suppress("MemberVisibilityCanBePrivate")
+class SliderButtonComponent : View {
 
 	// region Paint definition
 	private val foregroundPaint by lazy {
@@ -52,6 +58,13 @@ class SliderButtonComponent : View {
 	}
 	// endregion
 
+	// region Variables
+	private var primaryColor = 0
+	private var secondaryColor = 0
+	private val radius = 10
+	private val textSize = 20
+	var text: String = ""
+
 	private var _value = 0.0f
 	var value
 		get() = this._value
@@ -59,13 +72,15 @@ class SliderButtonComponent : View {
 			setCurrentValue(v)
 		}
 
-	private var progress = 0f
 	var minValue = 0.0f
 	var maxValue = 100.0f
 	var onChangeListener: ((Float) -> Unit)? = null
 
+	private var progress = 0f
+
 	private var initialPosition: PointF = PointF(0f, 0f)
 	private var isDragging = false
+	// endregion
 
 	// region Constructors
 	constructor(context: Context) : super(context)
@@ -83,6 +98,7 @@ class SliderButtonComponent : View {
 	}
 	// endregion
 
+	// region Initial setup
 	init {
 		// Parent setup
 		this.elevation = 2 * this.context.resources.displayMetrics.density
@@ -114,28 +130,31 @@ class SliderButtonComponent : View {
 			this.maxValue = 100f
 		}
 	}
+	// endregion
 
-	private fun clamp(x: Float, min: Float, max: Float) = if (x > max) max else if (x < min) min else x
+	// region Utilities
+	private fun createRectPath(rect: RectF, radius: Float) = Path().apply { addRoundRect(rect, radius, radius, Path.Direction.CW) }
+	// endregion
+
+	// region Touch handling
+	private fun processTouchEvent(horizontalPosition: Float) {
+		// Calculate the progress of the slider
+		progress = horizontalPosition / this.width
+
+		// Locate it to the min and max values
+		val newValue = (progress * this.maxValue) clamp this.minValue..this.maxValue
+		if (newValue != _value) {
+			_value = newValue
+
+			this.invalidate()
+		}
+	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	override fun onTouchEvent(event: MotionEvent?): Boolean {
 		event?.let {
-			fun processEvent(horizontalPosition: Float) {
-				// Calculate the progress of the slider
-				progress = horizontalPosition / this.width
-
-				// Locate it to the min and max values
-				val newValue = clamp(progress * this.maxValue, this.minValue, this.maxValue)
-				if (newValue != _value) {
-					_value = newValue
-
-					this.invalidate()
-				}
-			}
-
-			// Define the events to be consumed
-			val consumedEvents = arrayOf(MotionEvent.ACTION_MOVE, MotionEvent.ACTION_UP, MotionEvent.ACTION_DOWN)
-			if (!consumedEvents.contains(event.action)) return@let
+			// Ignore useless events
+			if (!CONSUMED_EVENTS.contains(event.action)) return@let
 
 			// Get the position into an pointF
 			val position = PointF(event.x, event.y)
@@ -153,23 +172,23 @@ class SliderButtonComponent : View {
 					if (!isDragging) {
 						val distance = position - this.initialPosition
 
-						// Detect horizontal dragging
-						if (abs(distance.x) > abs(distance.y)) {
-							// Start dragging
-							isDragging = true
-						} else return false
+						// Discards vertical dragging
+						if (abs(distance.x) <= abs(distance.y)) return false
+
+						// Start horizontal dragging
+						isDragging = true
 					}
 
 					// Disallow parent view (e.g scroll views and view pagers) to steal touch events from this view
 					this.parent?.requestDisallowInterceptTouchEvent(true)
 
-					processEvent(position.x)
+					this.processTouchEvent(position.x)
 
 					return true
 				}
 
 				MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
-					processEvent(position.x)
+					this.processTouchEvent(position.x)
 
 					// Fires the onChangeListener
 					this.onChangeListener?.invoke(_value)
@@ -180,21 +199,13 @@ class SliderButtonComponent : View {
 					return true
 				}
 			}
-
 		}
 
 		return false
 	}
+	// endregion
 
-	private fun getTextBounds(): Rect {
-		val rect = Rect()
-		foregroundTextPaint.getTextBounds(text, 0, text.length, rect)
-
-		return rect
-	}
-
-	private fun createRectPath(rect: RectF, radius: Float) = Path().apply { addRoundRect(rect, radius, radius, Path.Direction.CW) }
-
+	// region Drawing
 	override fun draw(canvas: Canvas?) {
 		if (canvas == null) return super.draw(canvas)
 
@@ -212,8 +223,10 @@ class SliderButtonComponent : View {
 		// Clip all the canvas
 		canvas.save()
 		canvas.clipPath(createRectPath(bounds, cornerRadius))
+
 		// Draw the background shape
 		canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
+
 		// Draw the foreground shape
 		canvas.drawRect(foregroundBounds, foregroundPaint)
 		canvas.restore()
@@ -232,10 +245,13 @@ class SliderButtonComponent : View {
 			canvas.restore()
 		}
 	}
+	// endregion
 
+	// region Exposed methods
 	private fun setCurrentValue(value: Float) {
-		this._value = this.clamp(value, this.minValue, this.maxValue)
+		this._value = value clamp this.minValue..this.maxValue
 		this.progress = value / this.maxValue
+
 		this.invalidate()
 	}
 
@@ -249,9 +265,53 @@ class SliderButtonComponent : View {
 			}
 		}.start()
 	}
+	// endregion
+
+	// region Save and restore instance logic
+	override fun onSaveInstanceState(): Parcelable {
+		return Bundle().apply {
+			putParcelable("super", super.onSaveInstanceState())
+			putFloat("value", _value)
+		}
+	}
+
+	override fun onRestoreInstanceState(state: Parcelable?) {
+		if (state != null && state is Bundle) {
+			_value = state.getFloat("value")
+			super.onRestoreInstanceState(state.getParcelable("super"))
+		} else {
+			super.onRestoreInstanceState(state)
+		}
+	}
+	// endregion
+
+	// region View sizing
+	private fun getTextBounds(): Rect {
+		val rect = Rect()
+		foregroundTextPaint.getTextBounds(text, 0, text.length, rect)
+
+		return rect
+	}
+
+	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+		super.onSizeChanged(w, h, oldw, oldh)
+
+		val radius = this.radius * context.resources.displayMetrics.density
+		outlineProvider = OutlineProvider(w, h, radius)
+	}
+
+	/***
+	 * Class responsible for providing the outline of the custom view
+	 *
+	 * So the O.S can pre-process as it sees fit, like elevation shadow, for instance
+	 ***/
+	internal class OutlineProvider(private val width: Int, private val height: Int, private val radius: Float) : ViewOutlineProvider() {
+
+		override fun getOutline(view: View?, outline: Outline?) {
+			outline?.setRoundRect(0, 0, width, height, radius)
+		}
+
+	}
+	// endregion
 
 }
-
-
-
-

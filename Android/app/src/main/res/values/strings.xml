@@ -28,4 +28,14 @@
 	<string name="worker_notification_text">Toggling LED state...</string>
 	<!-- endregion -->
 
+	<!-- region Fragment LED -->
+	<string name="fragment_led_effects">Effects</string>
+	<string name="fragment_led_controls">Controls</string>
+	<string name="fragment_led_brightness">Brightness</string>
+	<string name="fragment_led_speed">Speed</string>
+	<string name="fragment_led_power_off">Power Off</string>
+	<string name="fragment_led_pick_color">Pick Color</string>
+	<string name="fragment_led_power_on">Power ON</string>
+	<!-- endregion -->
+
 </resources>
