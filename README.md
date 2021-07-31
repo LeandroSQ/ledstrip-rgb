@@ -13,6 +13,8 @@
 This project was made for controlling a WS8211 LED string using an ESP8266 MCU.
 And to control the MCU an Android app (It can also be controlled by a simple web interface at port 80)
 
+The project currently is under development, the goal being to add more screenshots, better documentation, unit testing, async requests on the firmware and so on...
+
 
 ### ESP8266
 
