@@ -172,7 +172,7 @@ void onRequestSetColor() {
         color = CRGB((uint32_t) strtol(value.c_str(), NULL, 16));
 
         // Hue is used as an internal counter, setting as 100 will engage it to change the color
-        if (currentAnimation == 2) hue = 100;
+        if (current_animation == 2) hue = 100;
 
 #ifdef FIREBASE_ENABLED
         setSettingInt("/settings/color", getColorCode(color));
@@ -190,15 +190,15 @@ void onRequestSetAnimation() {
         // Clears the LED strip before changing animations
         clearLED();
 
-        currentAnimation = (uint8_t) value.toInt();
+        current_animation = (uint8_t) value.toInt();
         brightness = 0;
 
         // Hue is used as an internal counter on animateSolidColor(), setting as 100 will engange it to change the color
-        if (currentAnimation == 2) hue = 100;
+        if (current_animation == 2) hue = 100;
         else hue = 0;
 
 #ifdef FIREBASE_ENABLED
-        setSettingUint8("/settings/animation", currentAnimation);
+        setSettingUint8("/settings/animation", current_animation);
 #endif
     }
 }

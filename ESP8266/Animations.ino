@@ -35,7 +35,7 @@ void animateSolidColor() {
     hue ++;
 
     if (hue >= 20) {
-        for (uint8_t i = 0; i < TABLE_LENGTH; i++) leds[i + TABLE_START] = color;
+        for (uint8_t i = 0; i < TABLE_LENGTH; i++) leds[i + TABLE_START] = current_color;
 
         FastLED.setBrightness(brightness);
 
@@ -69,7 +69,7 @@ void animateSparkle() {
         uint8_t index = random8(0, TABLE_LENGTH + 1);
 
         if (leds[index].r <= threshold && leds[index].g <= threshold && leds[index].b <= threshold) {
-            leds[index + TABLE_START] = applyBrightness(color, brightness);
+            leds[index + TABLE_START] = applyBrightness(current_color, brightness);
         }
     }
 
@@ -94,10 +94,10 @@ void animateKnightRider() {
 
     if (index < TABLE_LENGTH) {
         // LEFT TO RIGHT
-        leds[index + TABLE_START] = applyBrightness(color, brightness);
+        leds[index + TABLE_START] = applyBrightness(current_color, brightness);
     } else {
         // RIGHT TO LEFT
-        leds[(TABLE_LENGTH) - (index - TABLE_LENGTH) + TABLE_START] = applyBrightness(color, brightness);
+        leds[(TABLE_LENGTH) - (index - TABLE_LENGTH) + TABLE_START] = applyBrightness(current_color, brightness);
     }
 
     // Set the overall brightness
@@ -126,10 +126,10 @@ void animatePulse() {
         sleepFor = 17 * speed;
     } else {
         uint8_t a = (center + index) + TABLE_START;
-        leds[a] = applyBrightness(color, brightness);
+        leds[a] = applyBrightness(current_color, brightness);
 
         uint8_t b = TABLE_END - (center + index);
-        leds[b] = applyBrightness(color, brightness);
+        leds[b] = applyBrightness(current_color, brightness);
         sleepFor = (uint8_t) (22.0f * ((hue / (TABLE_LENGTH / 2.0f)))) + 11;
     }
 

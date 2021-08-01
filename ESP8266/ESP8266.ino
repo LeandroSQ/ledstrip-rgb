@@ -9,19 +9,26 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <RemoteDebug.h>
 
-#define DEBUG_SERIAL
-//#define WEB_DEBUG
-
 #include "Configuration.h"
+
+#include "Utility.h"
 
 /* WebServer configuration */
 ESP8266WebServer server(WEBSERVER_PORT);
+
+#ifdef FIREBASE_ENABLED
+	/* Firebase configuration*/
+	#define ENABLE_RTDB
+	#include <Firebase_ESP_Client.h>
+	FirebaseData fbdo;
+	FirebaseConfig firebase_config;
+    FirebaseAuth firebase_auth;
+#endif
 
 /* Brightness */
 uint8_t brightness = 0;
@@ -33,14 +40,15 @@ CRGB leds[LED_COUNT];
 float* buffer = nullptr;
 float hue = 0.0f;
 float speed = 2.1f;
-CRGB color = CRGB::Red;//CRGB::Black;
-uint8_t currentAnimation = 0;
+CRGB color = CRGB::Black;
+CRGB current_color = CRGB::Black;
+uint8_t current_animation = 0;
 
 /* Global variables */
 uint8_t sleepFor = 0;
 uint8_t timer = 0;
-unsigned long lastAnimationUpdate = 0;
-unsigned long lastServerUpdate = 0;
+unsigned long last_animation_update = 0;
+unsigned long last_server_update = 0;
 boolean running = true;
 
 /* Setup methods */
@@ -107,14 +115,14 @@ void loop() {
 	unsigned long now = millis();
 	uint8_t invalidated = false;
 
-	if (now - lastAnimationUpdate >= sleepFor) {
+	if (now - last_animation_update >= sleepFor) {
 		runAnimations();
-		lastAnimationUpdate = millis();
+		last_animation_update = millis();
 		invalidated = true;
 	} else delay(1);
 
-	if (now - lastServerUpdate >= 500) {
-		lastServerUpdate = millis();
+	if (now - last_server_update >= 500) {
+		last_server_update = millis();
 		updateServer();
 		invalidated = true;
 	}
@@ -130,7 +138,7 @@ inline void updateServer() {
 		WiFi.disconnect();
 		WiFi.reconnect();
 
-		lastServerUpdate = millis() + 200000;
+		last_server_update = millis() + 200000;
 		return;
 	} else {
 		digitalWrite(0, HIGH);
@@ -153,8 +161,11 @@ inline void runAnimations() {
 		// Animate brightness changes
 		animateBrightness();
 
+		// Animate color changes
+		animateColor();
+
 		// Animate the LED strip
-		switch(currentAnimation) {
+		switch(current_animation) {
 			case 0: animateRainbowCycle(); 	break;
 			case 1: animateRainbow(); 		break;
 			case 2: animateSolidColor(); 	break;
@@ -184,4 +195,8 @@ void animateBrightness() {
 	// More likely to be a Ascending f(x) = x^2
 	// Therefore by adding a square root of it, it flattens it making the brightness curve of the LED linear
 	brightness = (uint8_t) (sqrt(raw_brightness / 255.0) * 255.0f);
+}
+
+void animateColor() {
+	current_color = blend(current_color, color, (uint8_t) ((speed / 30.0f) * 255));
 }
