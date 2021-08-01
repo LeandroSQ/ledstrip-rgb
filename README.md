@@ -1,7 +1,7 @@
 <h1 align="center">LED Strip RGB</h1>
 
 <p align="center">  
-  <img src="./misc/logo.png" width="128"/>
+  <img src="./misc/banner blur.png"/>
 </p>
 
 <p align="center">Controlling WS8211 LED strip with ESP8266 and Android</p>
