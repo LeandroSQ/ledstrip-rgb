@@ -1,6 +1,6 @@
 <h1 align="center">LED Strip RGB</h1>
 
-<p align="center">  
+<p align="center">
   <img src="./misc/logo.png" width="128"/>
 </p>
 
@@ -32,13 +32,13 @@ Features:
   - speed
 - Web interface at port 80
 <img src="./misc/web interface.png" width="128"/>
-  
+
 - Remote debbuging via telnet
 - OTA (Over The Air) firmware updates
 - Configurable with define flags (On configuration.h, template to be released...)
 - Multiple effects
   - Rainbow cycle
-  - Rainbow 
+  - Rainbow
   - Solid color
   - Knight rider
   - Sparkle
@@ -48,7 +48,7 @@ Features:
 ---
 
 ### Android
- 
+
 Features:
 - Architecture
   - Kotlin
@@ -80,3 +80,41 @@ Features:
   - Optmized for performance
   - Customizable by code and xml properties (Styles also supported)
 
+
+
+## Example configuration.h
+```cpp
+/* Web server config */
+#define WIFI_SSID "..."
+#define WIFI_PASS "..."
+#define WIFI_DHCP_IP IPAddress(192, 168, 25, 1)
+#define WIFI_GATEWAY_IP IPAddress(192, 168, 25, 1)
+#define WIFI_SUBNET_MASK IPAddress(255, 255, 255, 0)
+#define WIFI_DNS_IP IPAddress(192, 168, 25, 1)
+#define WEBSERVER_PORT 80 /* Default http port */
+
+/* Firebase config */
+#define FIREBASE_ENABLED
+#define FIREBASE_HOST "..."
+#define FIREBASE_SSL_FINGERPRINT "..."
+#define FIREBASE_API_KEY "..."
+#define FIREBASE_AUTH_EMAIL "..."
+#define FIREBASE_AUTH_PASSWORD "..."
+
+/* LED config */
+#define LED_COUNT 48
+#define TX_PIN 1
+#define RX_PIN 3
+#define DATA_PIN 3
+#define TABLE_START 3 /* Table meaning the LEDS to be controlled, if all of the LEDS are to be controlled, then simply TABLE_START = 0 and TABLE_END = LED_COUNT*/
+#define TABLE_END 15
+#define TABLE_LENGTH (TABLE_END - TABLE_START)
+
+/* Animation config */
+#define TICKS_TO_UPDATE 10 /* Define the amount of ticks to update OTA and the WebServer */
+#define INITAL_BRIGHTNESS 170 /* Ranging 0 to 255 */
+
+/* Debugging (optional) */
+#define DEBUG_SERIAL
+#define DEBUG_WEB
+```
