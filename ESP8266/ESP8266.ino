@@ -23,7 +23,7 @@ ESP8266WebServer server(WEBSERVER_PORT);
 
 #ifdef FIREBASE_ENABLED
 	/* Firebase configuration*/
-	#define ENABLE_RTDB
+	#define ENABLE_FIRESTORE
 	#include <Firebase_ESP_Client.h>
 	FirebaseData fbdo;
 	FirebaseConfig firebase_config;

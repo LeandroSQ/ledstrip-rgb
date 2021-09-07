@@ -12,8 +12,7 @@ interface LEDService {
 	@FormUrlEncoded
 	suspend fun setBrightness(@Field("value") value: String): Response<Unit>
 
-	@POST("brightness")
-	@FormUrlEncoded
+	@POST("power_toggle")
 	suspend fun togglePower(): Response<Unit>
 
 	@GET("brightness")

@@ -24,6 +24,7 @@ inline void setupFirebase() {
 
     Firebase.begin(&firebase_config, &firebase_auth);
     fbdo.setBSSLBufferSize(512, 2048);
+    Firebase.reconnectWiFi(false);
 
     while (!Firebase.ready()) {
         yield();

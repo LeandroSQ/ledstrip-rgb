@@ -128,11 +128,13 @@ void onRequestGetBrightness() {
 void onRequestPowerToggle() {
     log("POST /power_toggle");
 
-    if (target_brightness <= 10) {
-        target_brightness = 0;
-    } else {
+    if (target_brightness <= 1) {
         target_brightness = 128;
+    } else {
+        target_brightness = 0;
     }
+
+    server.send(200, "text/html", "OK");
 
 #ifdef FIREBASE_ENABLED
     setSettingUint8("/settings/brightness", target_brightness);
