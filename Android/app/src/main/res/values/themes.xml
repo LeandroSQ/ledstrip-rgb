@@ -2,6 +2,7 @@
 
 	<style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
+		<item name="android:forceDarkAllowed">false</item>
 		<item name="fontFamily">@font/permanent_marker</item>
 		<item name="android:windowBackground">@color/light_background</item>
 		<item name="android:textColor">@color/light_foreground</item>
